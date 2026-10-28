@@ -1,5 +1,19 @@
 # @livekit/agents
 
+## 1.9.5
+
+### Patch Changes
+
+- Add DecisionModel for provider-neutral batched probability, choice, and score evaluation. - [#2735](https://github.com/livekit/agents-js/pull/2735) ([@rosetta-livekit-bot](https://github.com/apps/rosetta-livekit-bot))
+
+- Type `language_hint` on the inference `DeepgramOptions`, so a `deepgram/nova-3` caller can set `modelOptions: { language_hint: ['en', 'es'] }` without a type error, and widen `DeepgramFluxOptions.language_hint` to `string | string[]` for parity with the other providers. No wire change from the typing: the plugin already spreads `modelOptions` into the session's `extra`. - [#2826](https://github.com/livekit/agents-js/pull/2826) ([@adrian-cowham](https://github.com/adrian-cowham))
+
+  The plugin now also leaves off the wire a `language_hint` Deepgram cannot apply, instead of sending one the gateway silently ignores; the key is gated for Deepgram models only, so a hint another provider is given still reaches that provider. Deepgram applies the hint only in Nova-3 multi language mode, so on a non-Flux Deepgram model with any other language (or no language at all) the key is gated on the outgoing frame — both when the session opens and in a mid-session `session.update` — and a warning names the option, the model and the language, once per session. Only the frame is gated: `modelOptions` is never modified, so a later `language: 'multi'`, in the same update that supplies the hint or in one of its own, sends the hint again. `deepgram/flux-*` models keep the hint under any language, since the Flux provider forwards it, and the hint still reaches Deepgram only while the gateway's `deepgram_stt_language_hint` flag is open.
+
+- Report running jobs to the server after reconnecting, so it keeps tracking them - [#2865](https://github.com/livekit/agents-js/pull/2865) ([@davidzhao](https://github.com/davidzhao))
+
+- Send a session summary and the session duration in the recording upload header. The summary is the session report JSON without chat history and events. `sessionReportToJSON` now also emits `agent_name`, `duration_ms`, `user_turns`, `errors` and `close_reason` (a `livekit.agent.CloseReason` name), with `null` for unknown values, and takes options to omit the chat history and events. `SessionReport` gains `agentName`. - [#2824](https://github.com/livekit/agents-js/pull/2824) ([@jmcclanahan](https://github.com/jmcclanahan))
+
 ## 1.9.4
 
 ### Patch Changes
