@@ -1,5 +1,19 @@
 # @livekit/agents-plugin-rime
 
+## 1.9.5
+
+### Patch Changes
+
+- Add Rime Prism speech-to-speech through `AgentSession`, with tools, history and - [`8bb28f9`](https://github.com/livekit/agents-js/commit/8bb28f9be4a3cb0fd171afa1156708302cb33e1d) ([@naszzz](https://github.com/naszzz))
+  settings updates, and provider cancellation. The Rime plugin now requires Node.js
+  22 or later. Existing TTS APIs and ESM/CommonJS imports remain supported.
+
+- Update the Rime SDK to alpha.24. Preserve server-retained text after Prism interruptions - [`74ee0ad`](https://github.com/livekit/agents-js/commit/74ee0ad3447e22d26788da6dc8081cc1367b8556) ([@naszzz](https://github.com/naszzz))
+  and expose item truncation and response completion diagnostics on the realtime session.
+  Keep confirmed retained text when queued playback is interrupted after response completion.
+- Updated dependencies [[`f03a68e`](https://github.com/livekit/agents-js/commit/f03a68ef2bcfede42163b1d76aa7c31dc9496eca), [`a2c220f`](https://github.com/livekit/agents-js/commit/a2c220fc910d1080904774c16d12f8e6df9ef240), [`e3c31ff`](https://github.com/livekit/agents-js/commit/e3c31ff5fb7599b753c69e01e4db860ae15ec254), [`3d35950`](https://github.com/livekit/agents-js/commit/3d35950a173a1d30276c80f3cb131796f52febd5)]:
+  - @livekit/agents@1.9.5
+
 ## 1.9.4
 
 ### Patch Changes
